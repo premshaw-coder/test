@@ -1,3 +1,13 @@
-<h1>testing onpush</h1>
-<app-left></app-left>
-<app-right></app-right>
+<h1>{{firstName()}}</h1>
+<h1>{{lastName()}}</h1>
+<h1>{{fullName().toString().split(',').join(' ')}}</h1>
+
+
+<button (click)="firstNameData()">firstName</button>
+<button (click)="loadcomponent()">loadcomponent</button>
+
+
+
+<ng-template #newComponent></ng-template>
+<!-- <app-left></app-left>
+<app-right></app-right> -->
