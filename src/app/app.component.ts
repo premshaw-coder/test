@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('main');
+        // console.log('main');
 
     }
     data = signal(false)
@@ -47,4 +47,29 @@ export class AppComponent implements OnInit {
         this.newComponent.createComponent(newcomp)
     }
 
+
+}
+
+
+let user: any = ['souvik', 'prem']
+
+
+if (typeof Worker !== 'undefined') {
+    // Create a new
+    const worker = new Worker(new URL('./app.worker', import.meta.url));
+    console.log('before onmessage')
+    worker.onmessage = ({ data }) => {
+        console.log('during onmessage')
+        console.log(`page got message: ${data}`);
+    };
+
+    worker.onerror = () => {
+        console.log(`page got error`);
+
+    }
+    worker.postMessage(user);
+    console.log('postMessage')
+} else {
+    // Web Workers are not supported in this environment.
+    // You should add a fallback so that your program still executes correctly.
 }
