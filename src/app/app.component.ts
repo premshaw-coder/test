@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // console.log('main');
+        this.multithread()
 
     }
     data = signal(false)
@@ -47,29 +47,34 @@ export class AppComponent implements OnInit {
         this.newComponent.createComponent(newcomp)
     }
 
+    user: any = ['souvik', 'prem']
+    customer: any = { name: 'sayari' }
+    multithread() {
+        if (typeof Worker !== 'undefined') {
+            // Create a new
+            const worker = new Worker(new URL('./app.worker', import.meta.url));
+            // console.log('before onmessage')
+            worker.onmessage = ({ data }) => {
+                if (data.type === 'one') {
+                    console.log('page got message', data.data);
+                }
+                if (data.type === 'two') {
+                    console.log('page got message', data.data);
+                }
+            };
 
-}
+            worker.onerror = () => {
+                // console.log(`page got error`);
 
-
-let user: any = ['souvik', 'prem']
-
-
-if (typeof Worker !== 'undefined') {
-    // Create a new
-    const worker = new Worker(new URL('./app.worker', import.meta.url));
-    console.log('before onmessage')
-    worker.onmessage = ({ data }) => {
-        console.log('during onmessage')
-        console.log(`page got message: ${data}`);
-    };
-
-    worker.onerror = () => {
-        console.log(`page got error`);
-
+            }
+            worker.postMessage({ type: 'one', data: this.user });
+            worker.postMessage({ type: 'two', data: this.customer });
+            // console.log('postMessage')
+        } else {
+            // Web Workers are not supported in this environment.
+            // You should add a fallback so that your program still executes correctly.
+        }
     }
-    worker.postMessage(user);
-    console.log('postMessage')
-} else {
-    // Web Workers are not supported in this environment.
-    // You should add a fallback so that your program still executes correctly.
+
 }
+
