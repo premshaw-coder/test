@@ -1,39 +1,36 @@
-<mat-dialog-content>
-    <form class="example-form" [formGroup]="formGroup">
-        <mat-form-field>
-            <mat-label>Task Name</mat-label>
-            <input matInput formControlName="taskName">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Task Description</mat-label>
-            <input matInput formControlName="taskDescription">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Select Status</mat-label>
-            <mat-select formControlName="status">
-                <mat-option value="">All</mat-option>
-                <mat-option *ngFor="let status of allStatus" [value]="status">{{status}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+<form class="example-form" [formGroup]="formGroup">
+    <mat-form-field>
+        <mat-label>Task Name</mat-label>
+        <input matInput formControlName="taskName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Task Description</mat-label>
+        <input matInput formControlName="taskDescription">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Select Status</mat-label>
+        <mat-select formControlName="status">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let status of allStatus" [value]="status">{{status}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Select Priority</mat-label>
-            <mat-select formControlName="priority">
-                <mat-option value="">All</mat-option>
-                <mat-option *ngFor="let priority of priorities" [value]="priority">{{priority}}</mat-option>
-            </mat-select>
-        </mat-form-field>
+    <mat-form-field>
+        <mat-label>Select Priority</mat-label>
+        <mat-select formControlName="priority">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let priority of priorities" [value]="priority">{{priority}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Choose due date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="dueDate1">
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <!-- <button mat-button (click)="filterData()">Filter</button> -->
-    </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-raised-button class="" color="primary" (click)="saveFormData()">Submit</button>
-    <button mat-button mat-dialog-close>Cancel</button>
-</mat-dialog-actions>
+    <mat-form-field>
+        <mat-label>Choose due date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate1">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <!-- <button mat-button (click)="filterData()">Filter</button> -->
+</form>
+<button mat-button routerLink="/dashboard">DashBoard</button>
+<button mat-raised-button class="" color="primary" (click)="saveFormData()">Submit</button>
+<button mat-button mat-dialog-close>Cancel</button>

@@ -1,0 +1,107 @@
+<form class="example-form" [formGroup]="formGroup">
+    <mat-form-field>
+        <mat-label>Select Status</mat-label>
+        <mat-select formControlName="status">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let status of allStatus" [value]="status">{{status}}</mat-option>
+        </mat-select>
+        <mat-hint align="end">Select status</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Select Priority</mat-label>
+        <mat-select formControlName="priority">
+            <mat-option value="">All</mat-option>
+            <mat-option *ngFor="let priority of priorities" [value]="priority">{{priority}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Choose due date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-button (click)="filterData()">Filter</button>
+    <button mat-button (click)="filterData(true)">Reset Filter</button>
+    <button mat-button routerLink="/dialog">Dialog</button>
+
+</form>
+
+
+<h2>Boards</h2>
+<!-- <hello></hello> -->
+<div class="board">
+    <div class="lane lane-1" cdkDropList #todo="cdkDropList" [cdkDropListData]="toDoList"
+        [style.display]="toDoList?.length > 0 ? 'block' : 'none'" [cdkDropListConnectedTo]="[inProgress]"
+        (cdkDropListDropped)="drop($event)">
+        <div class="heading todo">To Do</div>
+        <div *ngFor="let item of toDoList; let ii = index" class="task"
+            [ngClass]="{'priorityHigh': item.priority == 'High', 'priorityMedium': item.priority == 'Medium', 'priorityLow': item.priority == 'Low'}"
+            cdkDrag>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                    <p>{{item.dueDate}}
+
+                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                            (click)="trash(toDoList,ii)"></i>
+                    </p>
+                </div> <!-- card body -->
+            </div> <!-- card -->
+
+        </div>
+    </div>
+
+    <div class="lane lane-2" cdkDropList #inProgress="cdkDropList" [cdkDropListData]="inProgressList"
+        [style.display]="inProgressList?.length > 0 ? 'block' : 'none'" [cdkDropListConnectedTo]="[todo,done]"
+        (cdkDropListDropped)="drop($event)">
+        <div class="heading doing">In Progress</div>
+        <div *ngFor="let item of inProgressList ; let ii = index" class="task"
+            [ngClass]="{'priorityHigh': item.priority == 'High', 'priorityMedium': item.priority == 'Medium', 'priorityLow': item.priority == 'Low'}"
+            cdkDrag>
+
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                    <p>{{item.dueDate}}
+                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                            (click)="trash(inProgressList,ii)"></i>
+                    </p>
+                </div> <!-- card body -->
+            </div> <!-- card -->
+
+
+        </div>
+    </div>
+
+    <div class="lane lane-2" cdkDropList #done="cdkDropList" [cdkDropListData]="doneList"
+        [style.display]="doneList?.length > 0 ? 'block' : 'none'" [cdkDropListConnectedTo]="[todo, inProgress]"
+        (cdkDropListDropped)="drop($event)">
+        <div class="heading done">Done</div>
+        <div *ngFor="let item of doneList; let ii=index" class="task"
+            [ngClass]="{'priorityHigh': item?.priority == 'High', 'priorityMedium': item?.priority == 'Medium', 'priorityLow': item?.priority == 'Low'}"
+            cdkDrag>
+
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                    <p>{{item.dueDate}}
+                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                            (click)="trash(doneList,ii)"></i>
+                    </p>
+                </div> <!-- card body -->
+            </div> <!-- card -->
+
+
+        </div>
+    </div>
+
+</div>
