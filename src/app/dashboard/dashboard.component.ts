@@ -18,11 +18,11 @@ const data: any = []
 @Component({
     selector: 'app-dashboard',
     standalone: true,
-    imports: [CommonModule,RouterModule, FormsModule, DragDropModule, MatFormFieldModule, MatButtonModule,
+    imports: [CommonModule, RouterModule, FormsModule, DragDropModule, MatFormFieldModule, MatButtonModule,
         MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, ReactiveFormsModule,],
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
-    providers: [DataService]
+    // providers: [DataService]
 })
 export class DashboardComponent implements OnInit {
     localData: any;
@@ -43,13 +43,14 @@ export class DashboardComponent implements OnInit {
         this.inProgressList = this.localData?.filter((e: any) => e.status == 'In Progress');
         this.doneList = this.localData?.filter((e: any) => e.status == 'Complete');
     }
+
     ngOnInit(): void {
         this.dataService.$taskDatas.subscribe((data) => {
+            console.log('data', data)
             this.localData?.push(data)
-            console.log('localData', this.localData)
+            this.setData()
+            this.reset();
         })
-        this.setData()
-        this.reset();
     }
 
     // see https://stackoverflow.com/questions/53144939/angular-cdk-connecting-multiple-drop-zones-with-cdkdroplistconnectedto

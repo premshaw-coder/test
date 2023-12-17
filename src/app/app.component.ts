@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { DataService } from './data.service';
 
 @Component({
     selector: 'app-root',
@@ -12,5 +13,9 @@ import { RouterOutlet } from '@angular/router';
 
 })
 export class AppComponent {
-   
+
+    constructor(private sdas: DataService) {
+        sdas.$taskDatas.subscribe(data => console.log(data))
+    }
+
 }

@@ -17,10 +17,10 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss',
-  imports: [CommonModule,RouterModule, FormsModule, MatButtonModule, MatSelectModule, ReactiveFormsModule,
+  imports: [CommonModule, RouterModule, FormsModule, MatButtonModule, MatSelectModule, ReactiveFormsModule,
     MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
   ],
-  providers: [DataService]
+  // providers: [DataService]
 })
 export class DialogComponent implements OnInit {
   formGroup!: FormGroup<any>;
