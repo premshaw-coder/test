@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { DataService } from '../data.service';
 import { RouterModule } from '@angular/router';
 import data from '../../assets/data.json'
@@ -25,9 +25,8 @@ import data from '../../assets/data.json'
     // providers: [DataService]
 })
 export class DashboardComponent implements OnInit {
-    taskDelete() {
-        throw new Error('Method not implemented.');
-    }
+    bgcolor = 'lightyellow'
+    format = (value: string) => formatDate(value, 'short', this.locale)
     localData: any = data;
     formGroup !: FormGroup
 
@@ -38,7 +37,7 @@ export class DashboardComponent implements OnInit {
 
     inProgressList: any = [];
     doneList: any = [];
-    constructor(private dataService: DataService) {
+    constructor(@Inject(LOCALE_ID) public locale: string, private dataService: DataService) {
 
     }
     setData() {
@@ -51,7 +50,7 @@ export class DashboardComponent implements OnInit {
         this.reset();
         this.setData()
         this.dataService.$taskDatas.subscribe(() => {
-            this.localData=data
+            this.localData = data
             this.setData()
         })
         console.log('localData', this.localData)

@@ -19,11 +19,10 @@ div {
 }
 
 .board {
-    width: 100%;
+    width: 98vw;
     border: 0px solid saddlebrown;
     height: 600px;
     display: flex;
-    xjustify-content: space-evenly;
 }
 
 .lane {
@@ -32,6 +31,7 @@ div {
     margin-left: 10px;
     display: flex;
     flex-direction: column;
+    width: 33vw
 }
 
 .task {
@@ -74,12 +74,15 @@ div {
 
 .priorityHigh {
     border-left-color: red;
+    background-color: antiquewhite;
 }
 
 .priorityLow {
     border-left-color: blue;
+    background-color: aliceblue;
 }
 
 .priorityMedium {
     border-left-color: orange;
+    background-color: lightyellow;
 }
