@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import data from '../assets/data.json'
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DataService {
-  subject: BehaviorSubject<any> = new BehaviorSubject({})
+  subject: Subject<any> = new Subject()
   $taskDatas: Observable<any[]> = this.subject.asObservable()
   constructor() {
-    this.$taskDatas.subscribe(data => {
-      console.log(data);
-
+    this.$taskDatas.subscribe((data2: any) => {
+      console.log(data2);
+      data.push(data2)
     })
     //     setInterval(() => {
     // this.subject.next(+new Date)

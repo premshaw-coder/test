@@ -11,9 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../data.service';
 import { RouterModule } from '@angular/router';
-// import data from '../assets/data.json'
+import data from '../../assets/data.json'
 
-const data: any = []
+// const data: any = []
 
 @Component({
     selector: 'app-dashboard',
@@ -25,7 +25,7 @@ const data: any = []
     // providers: [DataService]
 })
 export class DashboardComponent implements OnInit {
-    localData: any;
+    localData: any = data;
     formGroup !: FormGroup
 
     allStatus: string[] = ['To Do', 'In Progress', 'Complete'];
@@ -45,11 +45,13 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.dataService.$taskDatas.subscribe((data) => {
+        this.reset();
+        this.setData()
+        this.dataService.$taskDatas.subscribe(() => {
             console.log('data', data)
-            this.localData?.push(data)
+            this.localData = data;
+            // this.localData?.push(data)
             this.setData()
-            this.reset();
         })
     }
 

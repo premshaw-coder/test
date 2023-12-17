@@ -38,7 +38,7 @@ export class DialogComponent implements OnInit {
     this.formGroup = new FormGroup({
       status: new FormControl('To Do'),
       priority: new FormControl(''),
-      dueDate1: new FormControl(''),
+      dueDate: new FormControl(''),
       taskName: new FormControl(''),
       taskDescription: new FormControl('')
     });
