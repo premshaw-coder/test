@@ -1,4 +1,4 @@
-<form class="example-form" [formGroup]="formGroup">
+<form class="example-form" [formGroup]="formGroup" style="display: flex; flex-direction: row; justify-content: space-evenly;margin-top: 24px;">
     <mat-form-field>
         <mat-label>Task Name</mat-label>
         <input matInput formControlName="taskName">
@@ -31,6 +31,8 @@
     </mat-form-field>
     <!-- <button mat-button (click)="filterData()">Filter</button> -->
 </form>
-<button mat-button routerLink="/dashboard">DashBoard</button>
-<button mat-raised-button class="" color="primary" (click)="saveFormData()">Submit</button>
-<button mat-button mat-dialog-close>Cancel</button>
+<div style="position: relative;left: 1200px;">
+    <button mat-raised-button color="primary" routerLink="/dashboard" style="margin-right: 16px;">DashBoard</button>
+    <button mat-raised-button color="accent" (click)="saveFormData()">Submit</button>
+</div>
+

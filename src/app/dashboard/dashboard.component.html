@@ -24,9 +24,9 @@
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <button mat-button (click)="filterData()">Filter</button>
-    <button mat-button (click)="filterData(true)">Reset Filter</button>
-    <button mat-button routerLink="/dialog">Dialog</button>
+    <button mat-raised-button color="primary"  (click)="filterData()">Filter</button>
+    <button mat-raised-button color="accent" (click)="filterData(true)">Reset Filter</button>
+    <button mat-raised-button color="warn" routerLink="/dialog">Create Task</button>
 
 </form>
 
@@ -42,11 +42,14 @@
             cdkDrag>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
-                    <p class="card-text" style="margin:0px">{{item.taskDescription}} </p>
-                    <p>{{format(item.dueDate)}}
-                        <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
-                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                    <p class="card-text" style="margin:0px">TaskName:{{item.taskName}} </p>
+                    <p class="card-text" style="margin:0px">TaskDescription:{{item.taskDescription}} </p>
+                    <p class="card-text" style="margin:0px">Priority:{{item.priority}} </p>
+                    <p class="card-text" style="margin:0px">Status:{{item.status}} </p>
+                    <p>DueDate:{{format(item.dueDate)}}
+                        <i class="far fa-edit" style="float:right"
+                            [routerLink]="'/dialog/'+ item.id"></i>
+                        <i class="far fa-trash-alt" style="float:right;padding-right:16px;color:blue"
                             (click)="trash(item?.id)"></i>
                     </p>
                 </div> <!-- card body -->
@@ -65,10 +68,13 @@
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
-                    <p>{{format(item.dueDate)}}
+                    <p class="card-text" style="margin:0px">TaskName:{{item.taskName}} </p>
+                    <p class="card-text" style="margin:0px">TaskDescription:{{item.taskDescription}} </p>
+                    <p class="card-text" style="margin:0px">Priority:{{item.priority}} </p>
+                    <p class="card-text" style="margin:0px">Status:{{item.status}} </p>
+                    <p>DueDate:{{format(item.dueDate)}}
                         <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
-                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                        <i class="far fa-trash-alt" style="float:right;padding-right:16px;color:blue"
                             (click)="trash(item?.id)"></i>
                     </p>
                 </div> <!-- card body -->
@@ -88,10 +94,13 @@
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
-                    <p>{{format(item.dueDate)}}
+                    <p class="card-text" style="margin:0px">TaskName:{{item.taskName}} </p>
+                    <p class="card-text" style="margin:0px">TaskDescription:{{item.taskDescription}} </p>
+                    <p class="card-text" style="margin:0px">Priority:{{item.priority}} </p>
+                    <p class="card-text" style="margin:0px">Status:{{item.status}} </p>
+                    <p>DueDate:{{format(item.dueDate)}}
                         <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
-                        <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
+                        <i class="far fa-trash-alt" style="float:right;padding-right:16px;color:blue"
                             (click)="trash(item.id)"></i>
                     </p>
                 </div> <!-- card body -->
