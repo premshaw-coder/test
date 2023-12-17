@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { DialogComponent } from './dialog/dialog.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'dialog', component: DialogComponent },
-    { path: 'dialog/:id', component: DialogComponent }
+    { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard.component').then((c) => c.DashboardComponent) },
+    { path: 'dialog', loadComponent: () => import('./dialog/dialog.component').then((c) => c.DialogComponent) },
+    { path: 'dialog/:id', loadComponent: () => import('./dialog/dialog.component').then((c) => c.DialogComponent) }
 ];
