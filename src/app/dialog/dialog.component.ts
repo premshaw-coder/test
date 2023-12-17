@@ -52,7 +52,7 @@ export class DialogComponent implements OnInit {
   saveFormData() {
     if (this.formGroup.invalid) {
       alert('all the form fields are reuired')
-      return ""
+      return "nothing"
     }
     let data2 = this.formGroup.value
     data2.id = this.id || +new Date()
