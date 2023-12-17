@@ -15,14 +15,10 @@ export class DataService {
       console.log(data2);
       data.push(data2)
     })
-    //     setInterval(() => {
-    // this.subject.next(+new Date)
-    //     }, 500);
   }
 
   createtask(taskData: any) {
     console.log(taskData);
-
     this.subject.next(taskData) //current value emitted
   }
 

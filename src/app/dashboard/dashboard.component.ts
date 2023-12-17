@@ -25,6 +25,9 @@ import data from '../../assets/data.json'
     // providers: [DataService]
 })
 export class DashboardComponent implements OnInit {
+    taskDelete() {
+        throw new Error('Method not implemented.');
+    }
     localData: any = data;
     formGroup !: FormGroup
 
@@ -48,21 +51,22 @@ export class DashboardComponent implements OnInit {
         this.reset();
         this.setData()
         this.dataService.$taskDatas.subscribe(() => {
-            console.log('data', data)
-            this.localData = data;
-            // this.localData?.push(data)
+            this.localData=data
             this.setData()
         })
+        console.log('localData', this.localData)
     }
 
     // see https://stackoverflow.com/questions/53144939/angular-cdk-connecting-multiple-drop-zones-with-cdkdroplistconnectedto
 
 
-    trash(list: any[], index: any) {
-        // alert('kiko!'+ index);
-
-        list.splice(index, 1);
-
+    trash(id: any) {
+        console.log('id', id)
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id === id) data.splice(i, 1);
+        }
+        this.localData = data;
+        this.setData();
     }
 
 

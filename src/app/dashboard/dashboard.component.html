@@ -43,12 +43,12 @@
             cdkDrag>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
                     <p>{{item.dueDate}}
 
-                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
                         <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
-                            (click)="trash(toDoList,ii)"></i>
+                            (click)="trash(item?.id)"></i>
                     </p>
                 </div> <!-- card body -->
             </div> <!-- card -->
@@ -67,11 +67,11 @@
 
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
                     <p>{{item.dueDate}}
-                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
                         <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
-                            (click)="trash(inProgressList,ii)"></i>
+                            (click)="trash(item?.id)"></i>
                     </p>
                 </div> <!-- card body -->
             </div> <!-- card -->
@@ -90,12 +90,12 @@
 
 
             <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <p class="card-text" style="margin:0px">{{item.title}} </p>
+                <div class="card-body" (click)="taskDelete()">
+                    <p class="card-text" style="margin:0px">{{item.taskName}} </p>
                     <p>{{item.dueDate}}
-                        <i class="far fa-edit" style="float:right"></i>
+                        <i class="far fa-edit" style="float:right" [routerLink]="'/dialog/'+ item.id"></i>
                         <i class="far fa-trash-alt" style="float:right;padding-right:8px;color:blue"
-                            (click)="trash(doneList,ii)"></i>
+                            (click)="trash(item.id)"></i>
                     </p>
                 </div> <!-- card body -->
             </div> <!-- card -->

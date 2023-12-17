@@ -10,7 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DataService } from '../data.service';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import data from '../../assets/data.json'
 
 @Component({
   selector: 'app-dialog',
@@ -26,21 +27,25 @@ export class DialogComponent implements OnInit {
   formGroup!: FormGroup<any>;
   allStatus: string[] = ['To Do', 'In Progress', 'Complete'];
   priorities: string[] = ['High', 'Medium', 'Low'];
+  id!:string
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private route:ActivatedRoute) {
 
   }
   ngOnInit(): void {
-    this.initialForm()
+    this.id=this.route.snapshot.params['id']
+    console.log('this.route.snapshot.params', this.route.snapshot.params)
+    this.initialForm(data.find(task=>task.id == +this.id))
+
   }
 
-  initialForm() {
+  initialForm(data?:any) {
     this.formGroup = new FormGroup({
-      status: new FormControl('To Do'),
-      priority: new FormControl(''),
-      dueDate: new FormControl(''),
-      taskName: new FormControl(''),
-      taskDescription: new FormControl('')
+      status: new FormControl(data?.status || 'To Do'),
+      priority: new FormControl(data?.priority || ''),
+      dueDate: new FormControl(data?.dueDate || ''),
+      taskName: new FormControl(data?.taskName || ''),
+      taskDescription: new FormControl(data?.taskDescription || '')
     });
   }
 
@@ -48,10 +53,13 @@ export class DialogComponent implements OnInit {
     if (this.formGroup.invalid) {
       return this.formGroup.markAllAsTouched()
     }
-    let data = this.formGroup.value
-    data.id = +new Date()
-    this.dataService.createtask(data)
+    let data2 = this.formGroup.value
+    data2.id = this.id || +new Date()
+    if (this.id) {
+      let index = data.findIndex((task:any)=>task.id == +this.id)
+      data[index]=data2
+    }
+    else this.dataService.createtask(data2)
   }
-
 
 }
